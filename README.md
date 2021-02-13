@@ -1,8 +1,6 @@
-# Arduino HomeKit ESP8266 
+# HomeKit ESP8266 
 
-
-[中文说明](translations/README_cn.md) | [Português Brasileiro](translations/README-ptbr.md)
-
+# This Project Was Fork from Mixiaoxiao/Arduino-HomeKit-ESP8266 
 
 ## Apple HomeKit accessory server library for ESP8266 Arduino
 
@@ -32,7 +30,13 @@ For ESP32, see [Arduino-HomeKit-ESP32](https://github.com/Mixiaoxiao/Arduino-Hom
 
 ## Usage
 
-1. Define your accessory in a .c file to enjoy the  convenient "Macro" style declaration. You can also define your accessory in a .ino file using C++ code.
+1. Add Src file to Arduino IDE Library
+	- Download This project in ZIP
+	- Arduino IDE program 
+	- On toolbar click Sketch -----> Include Library -----> Add .ZIP Library
+	- Select file from Download and You good to go.
+
+2. Define your accessory in a .c file to enjoy the  convenient "Macro" style declaration. You can also define your accessory in a .ino file using C++ code.
 	```C
 		homekit_accessory_t *accessories[] = ...
 		homekit_server_config_t config = {
@@ -42,22 +46,24 @@ For ESP32, see [Arduino-HomeKit-ESP32](https://github.com/Mixiaoxiao/Arduino-Hom
 			//.setupId = "ABCD" //optional
 		};
 	```
-2. In your sketch
+3. Config Your WIFI Settings at wifi_info.ino by
 	```C
-		#include <arduino_homekit_server.h>;
-		
-		//access the config defined in C code
-		extern "C" homekit_server_config_t config; 
-		
-		void setup() {
-			WiFi.begin(ssid, password);
-			arduino_homekit_setup(&config);
-		}
-		
-		void loop() {
-			arduino_homekit_loop();
-		}
+		const char *ssid = "Your WIFI NAME HERE";
+		const char *password = "YOUR WIFI PASSWORD HERE";
 	```
+4. Change Your ESP32/8266 Setting by Using this.
+	```C
+		* Module: Generic ESP8266 Module (to enable full settings)
+		* FlashSize: at least 470KB for sketch (see `WolfSSL` section if you want a smaller sketch) 
+		* LwIP Variant: v2 Lower Memory (for lower memory use)
+		* Debug Level: None (for lower memory use)
+		* Espressif FW: nonos-sdk 2.2.1+119(191122) (which I used to build this project)
+		* SSL Support: Basic SSL ciphers (lower ROM use)
+		* VTables: Flash (does not matter maybe)
+		* Erase Flash: select `All Flash Contents` when you first upload
+		* CPU Frequency: 160MHz (must)
+	```
+	
 Done.
 
 ## Performance
