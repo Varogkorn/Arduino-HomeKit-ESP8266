@@ -1,6 +1,5 @@
 # HomeKit ESP8266 
 
-## This Project Was Fork from Mixiaoxiao/Arduino-HomeKit-ESP8266 
 
 ## Apple HomeKit accessory server library for ESP8266 Arduino
 
